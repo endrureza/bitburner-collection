@@ -1,0 +1,21 @@
+/** @param {NS} ns **/
+export async function main(ns) {
+    const serverRam = 8192
+	const serverCost = ns.getPurchasedServerCost(serverRam)
+	const serverLimit = ns.getPurchasedServerLimit()
+	const hckScript = ["hack.ns", "hake.ns", "grow.ns", "weaken.ns"]
+
+	for(let i = 1; i <= serverLimit; i++) {
+		const serverName = "p" + i
+		if (!ns.serverExists(serverName)) {
+			if (ns.getServerMoneyAvailable("home") >= serverCost) {
+				ns.purchaseServer(serverName, serverRam)
+
+				if (!ns.fileExists(hckScript, serverName)) {
+					await ns.scp(hckScript, "home", serverName)
+					ns.exec(hckScript, serverName, 2900, "catalyst")
+				}
+			}
+		}
+	}
+}

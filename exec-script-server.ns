@@ -1,0 +1,13 @@
+/** @param {NS} ns **/
+export async function main(ns) {
+	const target = ns.args[0]
+	const hckScript = "hack.ns"
+	const serverLimit = ns.getPurchasedServerLimit()
+
+	for (let i = 1; i <= serverLimit; i++) {
+		const serverName = "p" + i
+		if (ns.serverExists(serverName)) {
+			ns.exec(hckScript, serverName, 1366, target)
+		}
+	}
+}
