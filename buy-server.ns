@@ -1,6 +1,6 @@
 /** @param {NS} ns **/
 export async function main(ns) {
-    const serverRam = 8192
+    const serverRam = ns.args[0] || 8192
 	const serverCost = ns.getPurchasedServerCost(serverRam)
 	const serverLimit = ns.getPurchasedServerLimit()
 	const hckScript = ["hack.ns", "hake.ns", "grow.ns", "weaken.ns"]

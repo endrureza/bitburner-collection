@@ -1,13 +1,15 @@
 /** @param {NS} ns **/
 export async function main(ns) {
 	const target = ns.args[0]
-	const hckScript = "hack.ns"
+	const injectedScripts = ["hack.ns", "weaken.ns", "grow.ns"]
 	const serverLimit = ns.getPurchasedServerLimit()
 
 	for (let i = 1; i <= serverLimit; i++) {
 		const serverName = "p" + i
 		if (ns.serverExists(serverName)) {
-			ns.exec(hckScript, serverName, 1366, target)
+			injectedScripts.forEach((script) => {
+				ns.exec(hckScript, serverName, 1366, target)
+			})
 		}
 	}
 }
