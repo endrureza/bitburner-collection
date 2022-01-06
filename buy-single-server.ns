@@ -26,7 +26,7 @@ export async function main(ns) {
 	ns.tprint("Start Buying")
 
 	if (ns.getServerMoneyAvailable("home") >= serverCost) {
-		while (i < serverLimit) {
+		while (i <= serverLimit) {
 			const serverName = "p" + i
 			if (!ns.serverExists(serverName)) {
 				ns.purchaseServer(serverName, serverRam)
