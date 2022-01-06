@@ -1,10 +1,18 @@
 /** @param {NS} ns **/
 export async function main(ns) {
-	const serverRam = ns.args[0] || 8192
+	const defaultRam = 13 // 2 ^ 13 = 8192
+	let currentRam = ns.args[0] || defaultRam
+	let serverRam = 1
+
+	for(let iteration = 1; iteration <= currentRam; iteration++) {
+		serverRam = serverRam * 2
+	}
+
 	const serverCost = ns.getPurchasedServerCost(serverRam)
 	const serverLimit = ns.getPurchasedServerLimit()
 	const hckScript = ["hack.ns", "hake.ns", "grow.ns", "weaken.ns"]
 
+	ns.tprint("Server Ram: " + serverRam)
 	ns.tprint("Server Cost: " + serverCost)
 
 	let i = 1

@@ -2,15 +2,15 @@
 export async function main(ns) {
 	const target = ns.args[0]
 
+	displayServerGrowth(ns, target)
+	displayServerSecurityLevel(ns, target)
+	displayServerMinSecurityLevel(ns, target)
 	displayHackAnalyze(ns, target)
 	displayGrowAnalyze(ns, target)
 	displayWeakenAnalyze(ns, target)
-	displayServerSecurityLevel(ns, target)
-	displayServerMinSecurityLevel(ns, target)
 	displayServerAvailableMoney(ns, target)
 	displayServerMaxMoney(ns, target)
 	displayServerMaxRam(ns, target)
-	displayServerGrowth(ns, target)
 }
 
 /**@param {NS} ns */
@@ -61,6 +61,6 @@ function displayServerGrowth(ns, target) {
 }
 
 function round(num) {
-    var m = Number((Math.abs(num) * 100).toPrecision(15));
-    return Math.round(m) / 100 * Math.sign(num);
+	var m = Number((Math.abs(num) * 100).toPrecision(15));
+	return Math.round(m) / 100 * Math.sign(num);
 }
