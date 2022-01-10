@@ -3,7 +3,7 @@ export async function main(ns) {
 	var target = ns.args[0];
 	var moneyThresh = ns.getServerMaxMoney(target) * 0.9;
 	var securityThresh = ns.getServerMinSecurityLevel(target);
-	
+
 	if (ns.fileExists("BruteSSH.exe", "home")) {
 		ns.brutessh(target);
 	}

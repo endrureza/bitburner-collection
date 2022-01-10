@@ -1,7 +1,7 @@
 /** @param {NS} ns **/
 export async function main(ns) {
 	const target = ns.args[0]
-	const injectedScripts = ["hack.ns", "weaken.ns", "grow.ns"]
+	const injectedScripts = ["hack.js", "weaken.js", "grow.js"]
 	const serverLimit = ns.getPurchasedServerLimit()
 
 	for (let i = 1; i <= serverLimit; i++) {

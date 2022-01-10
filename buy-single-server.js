@@ -2,15 +2,20 @@
 export async function main(ns) {
 	const defaultRam = 13 // 2 ^ 13 = 8192
 	let currentRam = ns.args[0] || defaultRam
+	let target = ns.args[1] || "joesguns"
 	let serverRam = 1
 
-	for(let iteration = 1; iteration <= currentRam; iteration++) {
+	for (let iteration = 1; iteration <= currentRam; iteration++) {
 		serverRam = serverRam * 2
 	}
 
 	const serverCost = ns.getPurchasedServerCost(serverRam)
 	const serverLimit = ns.getPurchasedServerLimit()
-	const hckScript = ["hack.ns", "hake.ns", "grow.ns", "weaken.ns"]
+	const hckScript = ["hack.js", "hake.js", "grow.js", "weaken.js"]
+	const hckScriptRam = ns.getScriptRam("hack.js")
+	const wknScriptRam = ns.getScriptRam("weaken.js")
+	const totalHckThread = Math.round(serverRam / 2 / hckScriptRam)
+	const totalWknThread = Math.round(serverRam / 2 / wknScriptRam) - 1
 
 	ns.tprint("Server Ram: " + serverRam)
 	ns.tprint("Server Cost: " + serverCost)
@@ -32,6 +37,8 @@ export async function main(ns) {
 				ns.purchaseServer(serverName, serverRam)
 
 				await ns.scp(hckScript, "home", serverName)
+				ns.exec("hack.js", serverName, totalHckThread, target)
+				ns.exec("weaken.js", serverName, totalWknThread, target)
 
 				break;
 			}
